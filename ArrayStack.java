@@ -1,12 +1,12 @@
 
 public class ArrayStack<T> implements Stack<T> {
-	private int SIZE = 10;
+	private final int DEFAULT_SIZE = 10;
 	private T[] arr;
 	private int top;
 
 	@SuppressWarnings("unchecked")
 	public ArrayStack() {
-		arr = (T[]) new Object[SIZE];
+		arr = (T[]) new Object[DEFAULT_SIZE];
 		top = -1;
 	}
 
@@ -53,7 +53,6 @@ public class ArrayStack<T> implements Stack<T> {
 
 	@SuppressWarnings("unchecked")
 	protected void growArray() {
-		System.out.println("Stack growing");
 		T[] temp = (T[]) new Object[arr.length * 2];
 		for (int i = 0; i < arr.length; i++) {
 			temp[i] = arr[i];

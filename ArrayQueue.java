@@ -1,6 +1,6 @@
 
 public class ArrayQueue<T> implements Queue<T> {
-
+	private final int DEFAULT_SIZE = 10;
 	private T[] arr;
 	private int head;
 	private int tail;
@@ -9,12 +9,12 @@ public class ArrayQueue<T> implements Queue<T> {
 	public ArrayQueue() {
 		head = 0;
 		tail = 0;
-		arr = (T[]) new Object[10];
+		arr = (T[]) new Object[DEFAULT_SIZE];
 	}
 
 	@Override
 	public void enqueue(T s) {
-		if ((head + 1) % arr.length == tail) {
+		if ((tail + 1) % arr.length == head) {
 			growArray();
 		}
 		arr[tail] = s;
@@ -35,16 +35,6 @@ public class ArrayQueue<T> implements Queue<T> {
 		return temp;
 	}
 
-	//	@Override
-	//	public T toString() {
-	//		String s = "";
-	//		for (String item : arr) {
-	//			s += item + ", ";
-	//		}
-	//		s += "\nHead: " + head + "\nTail: " + tail;
-	//		return s;
-	//	}
-
 	@Override
 	public boolean empty() {
 		return head == tail;
@@ -52,24 +42,12 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@SuppressWarnings("unchecked")
 	protected void growArray() {
-		System.out.println("Queue growing");
-		System.out.println("Queue size: " + arr.length);
 		T[] temp = (T[]) new Object[arr.length * 2];
 		for (int i = 0; i < arr.length; i++) {
-			//			System.out.println(head + i < arr.length ? head + i: head + i % arr.length);
 			temp[i] = arr[head + i < arr.length ? head + i : (head + i) % arr.length];
 		}
+		head = 0;
+		tail = arr.length - 1;
 		arr = temp;
 	}
-
-	//	public static void main(String[] args) {
-	//		ArrayQueue<String> queue = new ArrayQueue<>();
-	//		queue.enqueue("A");
-	//		queue.enqueue("B");
-	//		queue.dequeue();
-	//		queue.enqueue("C");
-	//		System.out.println(queue);
-	//
-	//
-	//	}
 }
