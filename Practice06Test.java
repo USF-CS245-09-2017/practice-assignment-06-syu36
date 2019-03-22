@@ -1,22 +1,19 @@
-import java.util.regex.*;
-
-
 public class Practice06Test {
-	
+
 	protected Queue<String> queue;
 	protected Stack<String> stack;
 	protected final int size_of_test = 500;
 	protected final String randomString = "Hello world!";
 	protected final String[] expressionList = {"level", "anna"};
 	protected final String[] wrongList = {"first", "Matter fact", "Landed on his hip and busted his lip"};
-	
-	
+
+
 	public Practice06Test() {
 		queue = new ArrayQueue<String>();
 		stack = new ArrayStack<String>();
 	}
-	
-	
+
+
 	public void clearData() {
 		while (!queue.empty()) {
 			queue.dequeue();
@@ -25,8 +22,8 @@ public class Practice06Test {
 			stack.pop();
 		}
 	}
-	
-	
+
+
 	public boolean isPalindrome(String item) {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
@@ -42,15 +39,15 @@ public class Practice06Test {
 				return false;
 			}
 		}
-		
+
 		// At this point, the stack AND the queue should be empty. But check in case...
 		if (!stack.empty() || ! queue.empty())
 			return false;
-		
+
 		return true;
 	}
-	
-	
+
+
 	public void runTest() {
 		// Theory: The Queue and Stack constructors have been called.
 		int grade = 0;
@@ -61,7 +58,7 @@ public class Practice06Test {
 			if (queue.empty())
 				grade += 5;
 			System.out.println("[+" + grade + "%] Queue and Stack declared correctly.");
-	
+
 			// First tests: is the queue correct? Is the stack correct?
 			String first = "first";
 			String second = "second";
@@ -73,7 +70,7 @@ public class Practice06Test {
 			} else {
 				System.out.println("[ XX ] One or more Queue functions appear incorrect.");
 			}
-			
+
 			stack.push(first);
 			stack.push(second);
 			if (stack.pop() == second && stack.pop() == first && stack.empty()) {
@@ -82,7 +79,7 @@ public class Practice06Test {
 			} else {
 				System.out.println("[ XX ] One or more Stack functions appear incorrect.");
 			}
-			
+
 			// Additional sanity test: place a large number of items in the stack / queue to see if it resizes.
 			for (int i = 0; i < size_of_test; i++) {
 				queue.enqueue(randomString);
@@ -102,9 +99,9 @@ public class Practice06Test {
 			} else {
 				System.out.println("[ XX ] Stack or Queue do not resize correctly.");
 			}
-			
+
 			System.out.println("====================");
-	
+
 			// Second tests: does it correctly find palindromes?
 			for (String expression : expressionList) {
 				if (isPalindrome(expression)) {
@@ -115,9 +112,9 @@ public class Practice06Test {
 					System.out.println("[ XX ] \"" + expression + "\" determined to be a non-palindrome (incorrect).");
 				}
 			}
-			
+
 			System.out.println("====================");
-	
+
 			// Third tests: can it correctly identify non-palindromes?
 			for (String expression : wrongList) {
 				// System.out.print(expression + " determined to be: ");
